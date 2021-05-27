@@ -1,0 +1,376 @@
+-- phpMyAdmin SQL Dump
+-- version 5.0.3
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 03-02-2021 a las 15:53:12
+-- Versión del servidor: 10.4.14-MariaDB
+-- Versión de PHP: 7.2.34
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de datos: `bd_emergencia`
+--
+create database bd_emergencia;
+use bd_emergencia;
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ambulancia`
+--
+
+CREATE TABLE `ambulancia` (
+  `IdAmbulancia` int(11) NOT NULL,
+  `IdDispo_Ambu` int(11) DEFAULT NULL,
+  `Placa` char(6) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `ambulancia`
+--
+
+INSERT INTO `ambulancia` (`IdAmbulancia`, `IdDispo_Ambu`, `Placa`) VALUES
+(1, 1, 'AWZ32K'),
+(2, 2, 'S3SLOG');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `cargo_personal`
+--
+
+CREATE TABLE `cargo_personal` (
+  `IdCargo_PE` int(11) NOT NULL,
+  `DescCargo_PE` varchar(30) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `cargo_personal`
+--
+
+INSERT INTO `cargo_personal` (`IdCargo_PE`, `DescCargo_PE`) VALUES
+(1, 'PARAMEDICO'),
+(2, 'CHOFER');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `disponibilidad_ambulancia`
+--
+
+CREATE TABLE `disponibilidad_ambulancia` (
+  `IdDispo_Ambu` int(11) NOT NULL,
+  `DescDispo_Ambu` char(8) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `disponibilidad_ambulancia`
+--
+
+INSERT INTO `disponibilidad_ambulancia` (`IdDispo_Ambu`, `DescDispo_Ambu`) VALUES
+(1, 'ACTIVO'),
+(2, 'INACTIVO');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `disponibilidad_personal`
+--
+
+CREATE TABLE `disponibilidad_personal` (
+  `IdDispo_PE` int(11) NOT NULL,
+  `DescTipo_PE` char(8) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `disponibilidad_personal`
+--
+
+INSERT INTO `disponibilidad_personal` (`IdDispo_PE`, `DescTipo_PE`) VALUES
+(1, 'ACTIVO'),
+(2, 'INACTIVO');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `login`
+--
+
+CREATE TABLE `login` (
+  `Correo` varchar(50) DEFAULT NULL,
+  `Password` varchar(30) DEFAULT NULL,
+  `DNI_USU` char(8) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `login`
+--
+
+INSERT INTO `login` (`Correo`, `Password`, `DNI_USU`) VALUES
+('kimberro@gmail.com', 'romero', '72618210'),
+('johan.zaravia@gmail.com', 'zaravia', '72737827'),
+('Juanch@gmail.com', 'colorado', '72941842'),
+('raulto@gmail.com', 'raul', '81748164'),
+('ximegonzales@gmail.com', 'gonzales', '82849283'),
+('julian@gmail.com', 'prado', '82983847'),
+('alebravo@gmail.com', 'bravo', '92747173');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `personal`
+--
+
+CREATE TABLE `personal` (
+  `IdPersonal` int(11) NOT NULL,
+  `Nombre_PE` varchar(40) DEFAULT NULL,
+  `Apellido_PE` varchar(40) DEFAULT NULL,
+  `Sexo_PE` char(1) DEFAULT NULL,
+  `DNI_PE` varchar(8) DEFAULT NULL,
+  `Email_PE` varchar(50) DEFAULT NULL,
+  `Direccion_PE` varchar(50) DEFAULT NULL,
+  `Celular_PE` char(9) DEFAULT NULL,
+  `EstadoCivil_PE` char(1) DEFAULT NULL,
+  `FechaNaci_PE` date DEFAULT NULL,
+  `IdCargo_PE` int(11) DEFAULT NULL,
+  `IdDispo_PE` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `personal`
+--
+
+INSERT INTO `personal` (`IdPersonal`, `Nombre_PE`, `Apellido_PE`, `Sexo_PE`, `DNI_PE`, `Email_PE`, `Direccion_PE`, `Celular_PE`, `EstadoCivil_PE`, `FechaNaci_PE`, `IdCargo_PE`, `IdDispo_PE`) VALUES
+(1, 'Andres', 'Huerta Andrade', 'M', '84923042', 'andhuerta@gmail.com', 'Ancon 324 ', '937242834', 'C', '1934-03-20', 1, 2),
+(2, 'Gerardo', 'Velasquez Mora', 'F', '48292048', 'gervela@gmail.com', 'Los Rosales 3415', '937284928', 'S', '1933-03-12', 2, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `solicitud_emergencia`
+--
+
+CREATE TABLE `solicitud_emergencia` (
+  `IdSoli_E` int(11) NOT NULL,
+  `DNI_USU` char(8) NOT NULL,
+  `Descri_Soli` varchar(30) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `solicitud_emergencia`
+--
+
+INSERT INTO `solicitud_emergencia` (`IdSoli_E`, `DNI_USU`, `Descri_Soli`) VALUES
+(1, '72941842', 'TRAUMATISMO ENCEFALOCRANEANO'),
+(2, '82849283', 'HEMORRAGIA');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `solicitud_emergencia_personal`
+--
+
+CREATE TABLE `solicitud_emergencia_personal` (
+  `IdSoli_E` int(11) NOT NULL,
+  `IdPersonal` int(11) NOT NULL,
+  `IdAmbulancia` int(11) NOT NULL,
+  `DNI_USU` char(8) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `solicitud_emergencia_personal`
+--
+
+INSERT INTO `solicitud_emergencia_personal` (`IdSoli_E`, `IdPersonal`, `IdAmbulancia`, `DNI_USU`) VALUES
+(1, 1, 2, '72941842'),
+(1, 2, 2, '72941842');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuario`
+--
+
+CREATE TABLE `usuario` (
+  `DNI_USU` char(8) NOT NULL,
+  `Nombre_USU` varchar(40) NOT NULL,
+  `Apellido_USU` varchar(40) NOT NULL,
+  `Dirección_USU` varchar(60) DEFAULT NULL,
+  `Tipo_Sangre_USU` varchar(4) DEFAULT NULL,
+  `Peso_PA` decimal(5,2) DEFAULT NULL,
+  `Talla_PA` decimal(4,2) DEFAULT NULL,
+  `Numero_Contacto_USU` varchar(9) DEFAULT NULL,
+  `Alergias_USU` varchar(20) DEFAULT NULL,
+  `Observaciones_USU` varchar(50) DEFAULT NULL,
+  `Fecha_Nac_USU` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`DNI_USU`, `Nombre_USU`, `Apellido_USU`, `Dirección_USU`, `Tipo_Sangre_USU`, `Peso_PA`, `Talla_PA`, `Numero_Contacto_USU`, `Alergias_USU`, `Observaciones_USU`, `Fecha_Nac_USU`) VALUES
+('72618210', 'Kimberly', 'Romero', 'Brenia 201', 'O+', '51.40', '1.60', '987381927', '', 'Baja presion', '2001-12-11'),
+('72737827', 'Johan', 'Zaravia ', 'Huancavelica', 'O+', '50.00', '1.53', '918461638', 'Sol', 'covid', '2009-01-12'),
+('72941842', 'Juan', 'Colorado Honor', 'Huaral 842', 'O+', '109.24', '1.80', '914121397', NULL, 'Retraso Mental', '1989-05-25'),
+('81748164', 'raul', 'torres', 'Huaraz', 'o+', '90.30', '1.50', '92748164', 'Pelo de gatos ', 'hipertrofia', '1998-06-25'),
+('82748146', 'Lorena', 'Angulo', 'Callao 210', 'O+', '90.12', '1.90', '927461748', 'Cítricos', 'Hipotiroidismo', '1997-12-09'),
+('82849283', 'Ximena', 'Gonzales Mendiola', 'La victoria 324', 'O-', '80.50', '1.50', '93242942', NULL, NULL, '2001-01-12'),
+('82983847', 'Julian', 'Prado', 'Las Malvinas 237', 'A+', '80.50', '1.70', '927381728', 'Paracetamol', ' Sindrome de Down', '2003-02-02'),
+('92747173', 'Alejandro', 'Bravo', 'Mala 271', 'A-', '80.12', '1.60', '928462842', 'Chocolate', 'Hipertensión', '1996-12-02');
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `ambulancia`
+--
+ALTER TABLE `ambulancia`
+  ADD PRIMARY KEY (`IdAmbulancia`),
+  ADD KEY `FK_AMBU_DISPO` (`IdDispo_Ambu`);
+
+--
+-- Indices de la tabla `cargo_personal`
+--
+ALTER TABLE `cargo_personal`
+  ADD PRIMARY KEY (`IdCargo_PE`);
+
+--
+-- Indices de la tabla `disponibilidad_ambulancia`
+--
+ALTER TABLE `disponibilidad_ambulancia`
+  ADD PRIMARY KEY (`IdDispo_Ambu`);
+
+--
+-- Indices de la tabla `disponibilidad_personal`
+--
+ALTER TABLE `disponibilidad_personal`
+  ADD PRIMARY KEY (`IdDispo_PE`);
+
+--
+-- Indices de la tabla `login`
+--
+ALTER TABLE `login`
+  ADD PRIMARY KEY (`DNI_USU`);
+
+--
+-- Indices de la tabla `personal`
+--
+ALTER TABLE `personal`
+  ADD PRIMARY KEY (`IdPersonal`),
+  ADD KEY `FK_PERSONAL_CARGO` (`IdCargo_PE`),
+  ADD KEY `FK_PERSONAL_DISPO` (`IdDispo_PE`);
+
+--
+-- Indices de la tabla `solicitud_emergencia`
+--
+ALTER TABLE `solicitud_emergencia`
+  ADD PRIMARY KEY (`IdSoli_E`,`DNI_USU`),
+  ADD KEY `FK_SOLI_USU` (`DNI_USU`);
+
+--
+-- Indices de la tabla `solicitud_emergencia_personal`
+--
+ALTER TABLE `solicitud_emergencia_personal`
+  ADD PRIMARY KEY (`IdSoli_E`,`IdPersonal`,`DNI_USU`),
+  ADD KEY `FK_SOLI_EMER_PERSONAL` (`IdSoli_E`,`DNI_USU`),
+  ADD KEY `FK_SOLI_PERSONAL` (`IdPersonal`),
+  ADD KEY `FK_SOLI_AMBULANCIA` (`IdAmbulancia`);
+
+--
+-- Indices de la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  ADD PRIMARY KEY (`DNI_USU`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `ambulancia`
+--
+ALTER TABLE `ambulancia`
+  MODIFY `IdAmbulancia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `cargo_personal`
+--
+ALTER TABLE `cargo_personal`
+  MODIFY `IdCargo_PE` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `disponibilidad_ambulancia`
+--
+ALTER TABLE `disponibilidad_ambulancia`
+  MODIFY `IdDispo_Ambu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `disponibilidad_personal`
+--
+ALTER TABLE `disponibilidad_personal`
+  MODIFY `IdDispo_PE` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `personal`
+--
+ALTER TABLE `personal`
+  MODIFY `IdPersonal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `solicitud_emergencia`
+--
+ALTER TABLE `solicitud_emergencia`
+  MODIFY `IdSoli_E` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `ambulancia`
+--
+ALTER TABLE `ambulancia`
+  ADD CONSTRAINT `FK_AMBU_DISPO` FOREIGN KEY (`IdDispo_Ambu`) REFERENCES `disponibilidad_ambulancia` (`IdDispo_Ambu`);
+
+--
+-- Filtros para la tabla `login`
+--
+ALTER TABLE `login`
+  ADD CONSTRAINT `FK_LOGIN_USU` FOREIGN KEY (`DNI_USU`) REFERENCES `usuario` (`DNI_USU`);
+
+--
+-- Filtros para la tabla `personal`
+--
+ALTER TABLE `personal`
+  ADD CONSTRAINT `FK_PERSONAL_CARGO` FOREIGN KEY (`IdCargo_PE`) REFERENCES `cargo_personal` (`IdCargo_PE`),
+  ADD CONSTRAINT `FK_PERSONAL_DISPO` FOREIGN KEY (`IdDispo_PE`) REFERENCES `disponibilidad_personal` (`IdDispo_PE`);
+
+--
+-- Filtros para la tabla `solicitud_emergencia`
+--
+ALTER TABLE `solicitud_emergencia`
+  ADD CONSTRAINT `FK_SOLI_USU` FOREIGN KEY (`DNI_USU`) REFERENCES `usuario` (`DNI_USU`);
+
+--
+-- Filtros para la tabla `solicitud_emergencia_personal`
+--
+ALTER TABLE `solicitud_emergencia_personal`
+  ADD CONSTRAINT `FK_SOLI_AMBULANCIA` FOREIGN KEY (`IdAmbulancia`) REFERENCES `ambulancia` (`IdAmbulancia`),
+  ADD CONSTRAINT `FK_SOLI_EMER_PERSONAL` FOREIGN KEY (`IdSoli_E`,`DNI_USU`) REFERENCES `solicitud_emergencia` (`IdSoli_E`, `DNI_USU`),
+  ADD CONSTRAINT `FK_SOLI_PERSONAL` FOREIGN KEY (`IdPersonal`) REFERENCES `personal` (`IdPersonal`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

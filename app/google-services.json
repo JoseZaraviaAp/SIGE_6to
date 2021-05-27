@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "752187258173",
+    "firebase_url": "https://servicioemergencia-d8f42-default-rtdb.firebaseio.com",
+    "project_id": "servicioemergencia-d8f42",
+    "storage_bucket": "servicioemergencia-d8f42.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:752187258173:android:46670e2a63c2fb265b4154",
+        "android_client_info": {
+          "package_name": "insn.pe.appmovilsige"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "752187258173-5ttiul29rt7imob04db416tcp2ffm1dt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "insn.pe.appmovilsige",
+            "certificate_hash": "77b6f9bd715bce4c9e323ea5d33a73f1db15dcc0"
+          }
+        },
+        {
+          "client_id": "752187258173-mph1bsabcqol62lok2h2g0qk1c71qou8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTO-eE7-VwELtCkUJOFdfEhsCGkWivb_o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "752187258173-mph1bsabcqol62lok2h2g0qk1c71qou8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">AppMovilSIGE</string>
+    <string name="prefs_file">pe.insn.SIGE.PREFERENCE_FILE_KEY</string>
+    <string name="facebook_app_id">2577535259222798</string> <string name="fb_login_protocol_scheme">fb2577535259222798</string>
+    <string name="tvbienvenidosLOG">Bienvenido!</string>
+    <string name="saludo_login">Hola! Registrate</string>
+    <string name="valetcorreo">USUARIO</string>
+    <string name="valetpass">CONTRASEÑA</string>
+    <string name="valetolvidemicontraseña">Olvidé mi contraseña</string>
+    <string name="valbtningresar">Ingresar</string>
+    <string name="valtvregistrateconfb">O registrate usando</string>
+    <string name="valtvregistrate">¿No tienes una cuenta? <b>Registrate aquí</b></string>
+    <string name="title_activity_home">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="valtvmensajesplash">Nosotros luchamos por ti, tú quedate en casa por nosotros</string>
+</resources>
