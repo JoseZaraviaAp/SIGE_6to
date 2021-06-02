@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:fillViewport="true"
     android:fitsSystemWindows="true"
-    tools:context=".loginSIGE">
+    tools:context=".view.loginSIGE">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -122,7 +122,7 @@
                 android:text="@string/valetolvidemicontraseña" />
 
             <Button
-                android:id="@+id/button_signin"
+                android:id="@+id/btningresar"
                 style="@style/Button1"
                 android:layout_width="342dp"
                 android:layout_height="wrap_content"
@@ -168,7 +168,7 @@
 
             <Button
                 style="@style/TextyButton"
-                android:id="@+id/button_signup"
+                android:id="@+id/btnsignup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

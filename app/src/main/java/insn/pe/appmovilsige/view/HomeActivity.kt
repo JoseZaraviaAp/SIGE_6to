@@ -42,7 +42,5 @@ class HomeActivity : AppCompatActivity() {
         prefs.putString("provider",provider)
         prefs.apply()
 
-
-
     }
 }

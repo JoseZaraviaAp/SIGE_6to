@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">AppMovilSIGE</string>
     <string name="prefs_file">pe.insn.SIGE.PREFERENCE_FILE_KEY</string>
-    <string name="facebook_app_id">2577535259222798</string> <string name="fb_login_protocol_scheme">fb2577535259222798</string>
+    <string name="facebook_app_id">2577535259222798</string>
+    <string name="fb_login_protocol_scheme">fb2577535259222798</string>
     <string name="tvbienvenidosLOG">Bienvenido!</string>
     <string name="saludo_login">Hola! Registrate</string>
     <string name="valetcorreo">USUARIO</string>
@@ -15,4 +16,19 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="valtvmensajesplash">Nosotros luchamos por ti, tú quedate en casa por nosotros</string>
+    <string name="valtituloregistrouser">Registrate y forma parte de nosotros!</string>
+    <string name="valetdni">DNI</string>
+    <string name="valetnombre">NOMBRE</string>
+    <string name="valetapellido">APELLIDO</string>
+    <string name="valetfechanac">FECHA DE NACIMIENTO</string>
+    <string name="valetdireccion">DIRECCIÓN</string>
+    <string name="valettiposangre">TIPO DE SANGRE</string>
+    <string name="valetpeso">PESO</string>
+    <string name="valettalla">TALLA</string>
+    <string name="valetnumero">NUMERO</string>
+    <string name="valetalergias">ALERGIAS</string>
+    <string name="valetemail">EMAIL</string>
+    <string name="valetpassword">CONTRASEÑA</string>
+    <string name="valbtnsignout">Cerrar Sesión</string>
+    <string name="valetbienvenido">¡Bienvenido! ¿Necesitas ayuda?</string>
 </resources>

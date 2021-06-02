@@ -1,12 +1,9 @@
-package insn.pe.appmovilsige
+package insn.pe.appmovilsige.view
 
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
@@ -19,9 +16,16 @@ import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import insn.pe.appmovilsige.HomeActivity
+import insn.pe.appmovilsige.ProviderType
+import insn.pe.appmovilsige.R
 import insn.pe.appmovilsige.databinding.ActivityLoginSIGEBinding
-import java.security.Provider
-import javax.security.auth.callback.Callback
+import insn.pe.appmovilsige.retrofit.RetrofitCliente
+import insn.pe.appmovilsige.retrofit.request.LoginRequest
+import insn.pe.appmovilsige.retrofit.response.LoginReponse
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class loginSIGE : AppCompatActivity() {
     private val GOOGLE_SIGN_IN=100
@@ -32,6 +36,9 @@ class loginSIGE : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding= ActivityLoginSIGEBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        session()
+
         //gmail
         binding.ivgmailsignin.setOnClickListener {
             val googleConf=GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -69,9 +76,37 @@ class loginSIGE : AppCompatActivity() {
                 })
         }
 
+        binding.btnsignup.setOnClickListener{
+            startActivity(Intent(applicationContext,RegistroUsersActivity::class.java))
+        }
+
+        binding.btningresar.setOnClickListener {
+
+            val loginRequest = LoginRequest(binding.etusuario.text.toString(),binding.etcontra.text.toString())
+            val call: Call<List<LoginReponse>> =
+                    RetrofitCliente.retrofitService.autenticacion(loginRequest)
+            call.enqueue( object : Callback<List<LoginReponse>>{
+                override fun onResponse(call: Call<List<LoginReponse>>,response: Response<List<LoginReponse>>) {
+                    if (response.isSuccessful){
+                        val respuesta=response.body()!!
+                        if (respuesta.size!=0){
+                            irActivityHome(loginRequest.email,"RETrofit")
+                        }else{
+                            mostrarPantallaError()
+                        }
+                    }else{
+                        mostrarPantallaError()
+                    }
+                }
+
+                override fun onFailure(call: Call<List<LoginReponse>>, t: Throwable) {
+                    TODO("Not yet implemented")
+                }
+
+            })
+        }
 
     }
-
 
     //implementar validacio onStart()
     private fun session(){
@@ -85,7 +120,7 @@ class loginSIGE : AppCompatActivity() {
 
     }
     private fun irActivityHome(email :String, provider: String){
-        var intent = Intent(this,HomeActivity::class.java)
+        var intent = Intent(this, HomeActivity::class.java)
         intent.putExtra("email",email)
         intent.putExtra("provider",provider)
         startActivity(intent)
