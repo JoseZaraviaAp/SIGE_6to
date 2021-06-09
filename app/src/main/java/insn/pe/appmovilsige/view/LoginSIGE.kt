@@ -4,10 +4,13 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.lifecycle.ViewModelProvider
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
+import com.facebook.internal.Utility
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -19,6 +22,8 @@ import com.google.firebase.auth.GoogleAuthProvider
 import insn.pe.appmovilsige.HomeActivity
 import insn.pe.appmovilsige.ProviderType
 import insn.pe.appmovilsige.R
+import insn.pe.appmovilsige.UsuarioRequest
+import insn.pe.appmovilsige.common.MainViewModel
 import insn.pe.appmovilsige.databinding.ActivityLoginSIGEBinding
 import insn.pe.appmovilsige.retrofit.RetrofitCliente
 import insn.pe.appmovilsige.retrofit.request.LoginRequest
@@ -26,16 +31,22 @@ import insn.pe.appmovilsige.retrofit.response.LoginReponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.lang.Exception
 
 class loginSIGE : AppCompatActivity() {
     private val GOOGLE_SIGN_IN=100
     private val callbackManager= CallbackManager.Factory.create()
+
+    private var personaId:Int = 0
+
 
     private lateinit var binding: ActivityLoginSIGEBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivityLoginSIGEBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
 
         session()
 
@@ -62,7 +73,7 @@ class loginSIGE : AppCompatActivity() {
                             FirebaseAuth.getInstance().signInWithCredential(credencial)
                                 .addOnCompleteListener {
                                     if (it.isSuccessful) {
-                                        irActivityHome(it.result?.user?.email?:"", ProviderType.FACEBOOK.name)
+                                        verificarExistencia(it.result?.user?.email?:"")
                                     } else {
                                         mostrarPantallaError()
                                     }
@@ -89,8 +100,12 @@ class loginSIGE : AppCompatActivity() {
                 override fun onResponse(call: Call<List<LoginReponse>>,response: Response<List<LoginReponse>>) {
                     if (response.isSuccessful){
                         val respuesta=response.body()!!
+                        var usuarioLogged: LoginReponse =respuesta.get(0)
+
                         if (respuesta.size!=0){
-                            irActivityHome(loginRequest.email,"RETrofit")
+                            personaId=usuarioLogged.personaId
+                            irActivityHome(usuarioLogged.personaId)
+
                         }else{
                             mostrarPantallaError()
                         }
@@ -110,21 +125,29 @@ class loginSIGE : AppCompatActivity() {
 
     //implementar validacio onStart()
     private fun session(){
-        val prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
+        /*val prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
         val email=prefs.getString("email",null)
         val provider=prefs.getString("provider",null)
 
         if (email!=null && provider !=null){
             irActivityHome(email,provider)
+        }*/
+
+        try {
+            
+        }catch(excep:Exception){
+
         }
 
-    }
-    private fun irActivityHome(email :String, provider: String){
-        var intent = Intent(this, HomeActivity::class.java)
-        intent.putExtra("email",email)
-        intent.putExtra("provider",provider)
-        startActivity(intent)
 
+
+
+
+    }
+    private fun irActivityHome(personaId :Int){
+        var intent = Intent(this, HomeActivity::class.java)
+        intent.putExtra("personaId",personaId)
+        startActivity(intent)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -142,7 +165,9 @@ class loginSIGE : AppCompatActivity() {
                     FirebaseAuth.getInstance().signInWithCredential(credencial)
                         .addOnCompleteListener {
                             if (it.isSuccessful) {
-                                irActivityHome(cuenta.email ?: "", ProviderType.GOOGLE.name)
+                                verificarExistencia(cuenta.email ?: "")
+                                //check this
+                                //irActivityHome(cuenta.email ?: "", ProviderType.GOOGLE.name)
                             } else {
                                 mostrarPantallaError()
                             }
@@ -154,6 +179,8 @@ class loginSIGE : AppCompatActivity() {
         }
     }
 
+
+
     private fun mostrarPantallaError(){
         val builder=AlertDialog.Builder(this)
         builder.setTitle("Error")
@@ -161,5 +188,41 @@ class loginSIGE : AppCompatActivity() {
         builder.setPositiveButton("Aceptar",null)
         val dialog: AlertDialog=builder.create()
         dialog.show()
+    }
+
+
+    private fun verificarExistencia(email: String){
+
+        val emailRequest: String = email
+        val call: Call<List<LoginReponse>> =
+            RetrofitCliente.retrofitService.buscarxEmail(emailRequest)
+        call.enqueue( object : Callback<List<LoginReponse>>{
+            override fun onResponse(call: Call<List<LoginReponse>>,response: Response<List<LoginReponse>>) {
+                if (response.isSuccessful){
+                    val respuesta=response.body()!!
+                        if (respuesta.size!=0) {
+                            var usuarioLogged: LoginReponse =respuesta.get(0)
+                            irActivityHome(usuarioLogged.personaId)
+                        } else {
+                            irPantallaRegistro(email)
+                        }
+
+                }else{
+                    irPantallaRegistro(email)
+                }
+            }
+
+            override fun onFailure(call: Call<List<LoginReponse>>, t: Throwable) {
+                mostrarPantallaError()
+                t.printStackTrace()
+                Toast.makeText(applicationContext,""+t.printStackTrace(),Toast.LENGTH_LONG).show()
+            }
+        })
+    }
+
+    private fun irPantallaRegistro(email: String) {
+        val intent=Intent(this,RegistroUsersActivity::class.java)
+        intent.putExtra("email",email)
+        startActivity(intent)
     }
 }

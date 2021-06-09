@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+option java_package =  "insn.pe.appmovilsige";
+option java_multiple_files = true;
+message UsuarioRequest{
+  int32 persona_id=1;
+  string dni=2;
+  string nombre=3;
+  string apellido=4;
+  string fechanac=5;
+  string direccion=6;
+  string thumbnail=7;
+  string estado=8;
+
+}

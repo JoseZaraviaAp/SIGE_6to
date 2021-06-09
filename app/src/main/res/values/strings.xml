@@ -31,4 +31,11 @@
     <string name="valetpassword">CONTRASEÑA</string>
     <string name="valbtnsignout">Cerrar Sesión</string>
     <string name="valetbienvenido">¡Bienvenido! ¿Necesitas ayuda?</string>
+    <string name="valetdescripcion">¿Qué sucedió?</string>
+    <string name="title_activity_ubicacion">Map</string>
+    <string name="valetdescribeemergencia">Describe la emergencia</string>
+    <string name="valetubicacion">Tu ubicación</string>
+    <string name="valbtnconfirmarsoli">CONFIRMAR</string>
+    <string name="valbtncancelar">CANCELAR</string>
+    <string name="valtvmensajeespera">Su unidad de emergencia está en camino...</string>
 </resources>

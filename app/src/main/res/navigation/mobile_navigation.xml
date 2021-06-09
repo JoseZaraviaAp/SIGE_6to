@@ -8,18 +8,18 @@
     <fragment
         android:id="@+id/navigation_home"
         android:name="insn.pe.appmovilsige.view.ui.home.HomeFragment"
-        android:label="@string/title_home"
+        android:label="Emergencia"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="insn.pe.appmovilsige.view.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
+        android:label="Reportes"
         tools:layout="@layout/fragment_reportes" />
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="insn.pe.appmovilsige.view.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
+        android:label="Usuario"
         tools:layout="@layout/fragment_gestusuario" />
 
 </navigation>

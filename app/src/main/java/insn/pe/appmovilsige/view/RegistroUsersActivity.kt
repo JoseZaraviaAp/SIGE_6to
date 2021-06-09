@@ -26,6 +26,11 @@ class RegistroUsersActivity : AppCompatActivity() {
         binding= ActivityRegistroUsersBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val emailExtra=intent.getStringExtra("email")
+        if (emailExtra!=null){
+            binding.etemail.setText(emailExtra)
+        }
+
         binding.btnregresar.setOnClickListener {
             startActivity(Intent(applicationContext,loginSIGE::class.java))
         }
@@ -44,7 +49,7 @@ class RegistroUsersActivity : AppCompatActivity() {
                 binding.etemail.text.toString(),
                 binding.etemail.text.toString(),
                 binding.etpassword.text.toString())
-            Toast.makeText(this,binding.etpassword.text.toString(),Toast.LENGTH_LONG).show()
+
             val call: Call<List<RegistroPaResponse>> = RetrofitCliente.retrofitService.registroPaciente(RegistroRequest)
             call.enqueue( object : Callback<List<RegistroPaResponse>> {
                 override fun onResponse(call: Call<List<RegistroPaResponse>>, response: Response<List<RegistroPaResponse>>) {

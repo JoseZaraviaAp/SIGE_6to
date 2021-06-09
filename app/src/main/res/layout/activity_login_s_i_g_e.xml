@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackground"
-    android:orientation="vertical"
+    android:background="@drawable/fondolog"
     android:fillViewport="true"
     android:fitsSystemWindows="true"
+    android:orientation="vertical"
     tools:context=".view.loginSIGE">
 
     <RelativeLayout
@@ -18,9 +18,9 @@
         android:scrollbarThumbVertical="@null">
 
         <LinearLayout
-            android:layout_centerVertical="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:orientation="vertical">
 
             <ImageView
@@ -112,13 +112,13 @@
             </androidx.cardview.widget.CardView>
 
             <Button
-                style="@style/TextyButton"
                 android:id="@+id/button_forgot_password"
+                style="@style/TextyButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
-                android:padding="10dp"
                 android:layout_marginRight="24dp"
+                android:padding="10dp"
                 android:text="@string/valetolvidemicontraseña" />
 
             <Button
@@ -132,11 +132,11 @@
 
             <LinearLayout
                 android:id="@+id/social_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:gravity="center"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -167,8 +167,8 @@
             </LinearLayout>
 
             <Button
-                style="@style/TextyButton"
                 android:id="@+id/btnsignup"
+                style="@style/TextyButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

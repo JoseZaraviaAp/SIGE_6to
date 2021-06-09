@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fondolog"
     tools:context=".view.RegistroUsersActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -38,8 +39,8 @@
             android:layout_marginRight="174dp"
             android:fontFamily="@font/annie_use_your_telescope"
             android:text="@string/valtituloregistrouser"
-            android:textColor="@color/colorAccent"
-            android:textSize="20sp"
+            android:textColor="@color/md_indigo_900"
+            android:textSize="27sp"
             android:textStyle="bold|italic"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -188,7 +189,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout11"
-            android:layout_width="409dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -203,7 +204,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout12"
-            android:layout_width="409dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

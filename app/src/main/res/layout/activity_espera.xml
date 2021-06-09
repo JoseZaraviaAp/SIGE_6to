@@ -4,34 +4,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.MainActivity"
-    android:background="@drawable/fondo_splash">
+    android:background="#40CBD8"
+    tools:context=".view.EsperaActivity">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/app_logo_2"
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gifImageView"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/gifsplashespera"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.29">
+        app:layout_constraintVertical_bias="0.363">
 
-    </ImageView>
+    </pl.droidsonroids.gif.GifImageView>
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="41dp"
         android:fontFamily="@font/annie_use_your_telescope"
-        android:paddingLeft="27dp"
-        android:text="@string/valtvmensajesplash"
-        android:textColor="@color/black"
-        android:textSize="35sp"
-        android:textStyle="bold"
+        android:text="@string/valtvmensajeespera"
+        android:textColor="@color/md_blue_50"
+        android:textSize="23sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.363"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"></TextView>
+        app:layout_constraintTop_toBottomOf="@+id/gifImageView" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

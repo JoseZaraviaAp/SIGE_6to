@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.FragmentNavigatorExtras
+import insn.pe.appmovilsige.HomeActivity
 import insn.pe.appmovilsige.R
 import insn.pe.appmovilsige.databinding.FragmentReportesBinding
 import insn.pe.appmovilsige.view.loginSIGE
@@ -26,18 +27,12 @@ class DashboardFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentReportesBinding.inflate(inflater, container, false)
-
         binding.btncerrarsesion.setOnClickListener {
-            val prefs = this.activity?.getSharedPreferences(getString(R.string.prefs_file),Context.MODE_PRIVATE)
-                ?.edit()
-            prefs?.clear()
-            prefs?.apply()
-
+            (activity as HomeActivity).mainViewModel.limpiarDatos()
             startActivity(Intent(context,loginSIGE::class.java))
             activity?.onBackPressed()
-
+            activity?.finish();
         }
-
         return binding.root
     }
 
