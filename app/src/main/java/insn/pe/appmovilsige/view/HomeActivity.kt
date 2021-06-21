@@ -1,5 +1,6 @@
 package insn.pe.appmovilsige
 
+import android.content.Context
 import android.os.Bundle
 import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -45,8 +46,10 @@ class HomeActivity : AppCompatActivity() {
 
         val bundle=intent.extras
         var personaIdex=bundle?.getInt("personaId")
-
         if (personaIdex!=null) {
+            val prefs=getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit()
+            prefs.putString("personaId",personaIdex.toString())
+            prefs.apply()
             mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
             mainViewModel.usuarioLogged.observe(this, {
                 if(it.personaId!=0) {
@@ -54,9 +57,9 @@ class HomeActivity : AppCompatActivity() {
                 }
             })
             personaIdex?.let { actualizarDataProto(it) }
+        }else{
+            personaIdex=mainViewModel.usuarioLogged.value?.personaId
         }
-        //val prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit()
-        //prefs.apply()
 
     }
 

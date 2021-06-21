@@ -125,24 +125,11 @@ class loginSIGE : AppCompatActivity() {
 
     //implementar validacio onStart()
     private fun session(){
-        /*val prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
-        val email=prefs.getString("email",null)
-        val provider=prefs.getString("provider",null)
-
-        if (email!=null && provider !=null){
-            irActivityHome(email,provider)
-        }*/
-
-        try {
-            
-        }catch(excep:Exception){
-
+        val prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
+        val personaId=prefs.getString("personaId",null)
+        if (personaId!=null){
+            irActivityHome(personaId.toInt())
         }
-
-
-
-
-
     }
     private fun irActivityHome(personaId :Int){
         var intent = Intent(this, HomeActivity::class.java)

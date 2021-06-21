@@ -70,6 +70,7 @@
                         android:drawablePadding="12dp"
                         android:hint="@string/valetcorreo"
                         android:imeOptions="actionNext"
+                        android:inputType="textEmailAddress"
                         android:minWidth="320dp"
                         android:minHeight="50dp"
                         android:singleLine="true" />

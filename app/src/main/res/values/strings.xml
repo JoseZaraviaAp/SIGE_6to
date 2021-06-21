@@ -38,4 +38,13 @@
     <string name="valbtnconfirmarsoli">CONFIRMAR</string>
     <string name="valbtncancelar">CANCELAR</string>
     <string name="valtvmensajeespera">Su unidad de emergencia está en camino...</string>
+    <string name="tvnrosoli">N° Solicitud de emergencia</string>
+    <string name="tvnombrepac">Nombre :</string>
+    <string name="tvapellidopac">Apellido :</string>
+    <string name="tvdnipac">DNI :</string>
+    <string name="tvdescripcionemergencia">Descripción de la emergencia</string>
+    <string name="tvttitdatosatencion">Datos de atención</string>
+    <string name="tvcargo">Cargo :</string>
+    <string name="tvtitdescpersonal">Personal Asistente</string>
+    <string name="valtitdescreporte">Información de la emergencia</string>
 </resources>

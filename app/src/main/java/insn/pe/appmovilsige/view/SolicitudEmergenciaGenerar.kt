@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import insn.pe.appmovilsige.HomeActivity
 import insn.pe.appmovilsige.common.MainViewModel
@@ -43,7 +44,11 @@ class SolicitudEmergenciaGenerar : AppCompatActivity() {
             finish()
         }
         binding.btnconfirmarsolicitud.setOnClickListener {
-            buscarPacientexPersonaId(personaId!!.toInt())
+            if(binding.etdescripciN.text.toString()!=null&&binding.etdescripciN.text.toString()!="") {
+                buscarPacientexPersonaId(personaId!!.toInt())
+            }else{
+                mostrarPantallaError()
+            }
         }
         }
 
@@ -65,7 +70,7 @@ class SolicitudEmergenciaGenerar : AppCompatActivity() {
                             ,binding.etubicacion.text.toString()
                             ,fechaActual.toString()
                             ,pacienteID)
-                        generarSoliEmergencia(solicitudEmergenciaRequest)
+                        generarSoliEmergencia(solicitudEmergenciaRequest,personaId)
 
                     } else {
                         Toast.makeText(applicationContext,"algo ha salido mal",Toast.LENGTH_LONG).show()
@@ -83,7 +88,7 @@ class SolicitudEmergenciaGenerar : AppCompatActivity() {
         })
     }
 
-    private fun generarSoliEmergencia(solicitudEmergenciaRequest: GenerarSolicitudEmergenciaRequest) {
+    private fun generarSoliEmergencia(solicitudEmergenciaRequest: GenerarSolicitudEmergenciaRequest,personaId: Int) {
         val call: Call<String> =
             RetrofitCliente.retrofitService.registrarSoliEmergencia(solicitudEmergenciaRequest)
         call.enqueue( object : Callback<String> {
@@ -94,7 +99,9 @@ class SolicitudEmergenciaGenerar : AppCompatActivity() {
                         Toast.makeText(applicationContext,"Estamos buscando personal para tu emergencia.",Toast.LENGTH_LONG).show()
                         val intent = Intent(applicationContext,EsperaActivity::class.java)
                         intent.putExtra("pacienteId",solicitudEmergenciaRequest.pacienteSE.pacienteId)
+                        intent.putExtra("personaId",personaId)
                         startActivity(intent)
+                        finish()
                     }else{
                         Toast.makeText(applicationContext,"Error de Solicitud",Toast.LENGTH_LONG).show()
                     }
@@ -107,12 +114,22 @@ class SolicitudEmergenciaGenerar : AppCompatActivity() {
                 Toast.makeText(applicationContext,"Estamos buscando personal para tu emergencia.",Toast.LENGTH_LONG).show()
                 val intent = Intent(applicationContext,EsperaActivity::class.java)
                 intent.putExtra("pacienteId",solicitudEmergenciaRequest.pacienteSE.pacienteId)
+                intent.putExtra("personaId",personaId)
                 startActivity(intent)
                 t.printStackTrace()
+                finish()
             }
 
         })
     }
 
+    private fun mostrarPantallaError(){
+        val builder= AlertDialog.Builder(this)
+        builder.setTitle("Error")
+        builder.setMessage("Error de Registro. Verifique que los campos esten completos")
+        builder.setPositiveButton("Aceptar",null)
+        val dialog: AlertDialog =builder.create()
+        dialog.show()
+    }
 
 }

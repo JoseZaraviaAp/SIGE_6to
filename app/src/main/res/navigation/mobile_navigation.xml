@@ -13,13 +13,13 @@
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="insn.pe.appmovilsige.view.ui.notifications.NotificationsFragment"
+        android:name="insn.pe.appmovilsige.view.ui.notifications.ReporteFragment"
         android:label="Reportes"
-        tools:layout="@layout/fragment_reportes" />
+        tools:layout="@layout/fragment_gestpacientes" />
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="insn.pe.appmovilsige.view.ui.dashboard.DashboardFragment"
+        android:name="insn.pe.appmovilsige.view.ui.dashboard.PacienteFragment"
         android:label="Usuario"
-        tools:layout="@layout/fragment_gestusuario" />
+        tools:layout="@layout/fragment_reportes" />
 
 </navigation>
