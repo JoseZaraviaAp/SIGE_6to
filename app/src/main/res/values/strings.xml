@@ -47,4 +47,7 @@
     <string name="tvcargo">Cargo :</string>
     <string name="tvtitdescpersonal">Personal Asistente</string>
     <string name="valtitdescreporte">Información de la emergencia</string>
+    <string name="tvtitulogestusuario">Datos del Usuario</string>
+    <string name="etnombreapellido">NOMBRE Y APELLIDO</string>
+    <string name="tvtituloreporte">HISTORIAL DE EMERGENCIAS</string>
 </resources>

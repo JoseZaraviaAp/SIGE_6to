@@ -28,6 +28,18 @@ class PacienteFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentGestpacientesBinding.inflate(inflater, container, false)
+        val data=(activity as HomeActivity).mainViewModel.usuarioLogged.value!!
+        if (data!=null) {
+            binding.etnombreapellido.setText(data.nombre + " " + data.apellido)
+            binding.etnombreapellido.isEnabled=false
+            binding.etdni.setText(data.dni)
+            binding.etdni.isEnabled=false
+            binding.etfechanac.setText(data.fechanac)
+            binding.etfechanac.isEnabled=false
+            binding.etdireccion.setText(data.direccion)
+            binding.etdireccion.isEnabled=false
+        }
+
         binding.btncerrarsesion.setOnClickListener {
             val prefs=this.activity?.getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)?.edit()
             prefs?.clear()

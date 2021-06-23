@@ -82,7 +82,7 @@ class ReporteDetalleActivity : AppCompatActivity() {
             RetrofitCliente.retrofitService.buscarcargoxsoliId(emergenciaId!!.toInt())
         call.enqueue( object : Callback<List<CargoEmpleadoResponse>> {
             override fun onResponse(call: Call<List<CargoEmpleadoResponse>>, response: Response<List<CargoEmpleadoResponse>>) {
-w                if (response.isSuccessful){
+               if (response.isSuccessful){
                     val cargo1=response.body()!![0]
                     if (cargo1!=null){
                         binding.tvcargopa1.text=cargo1.descCargo_PE
@@ -100,7 +100,7 @@ w                if (response.isSuccessful){
             }
 
             override fun onFailure(call: Call<List<CargoEmpleadoResponse>>, t: Throwable) {
-                TODO("Not yet implemented")
+                t.printStackTrace()
             }
 
         })

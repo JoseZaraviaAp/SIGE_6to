@@ -7,8 +7,6 @@
     tools:context=".view.ui.notifications.ReporteFragment">
 
 
-
-
     <!--
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvreportes"
@@ -21,8 +19,24 @@
     </androidx.recyclerview.widget.RecyclerView> -->
     <ListView
         android:id="@+id/lvreporte"
-        android:layout_width="409dp"
-        android:layout_height="504dp"
+        android:layout_width="403dp"
+        android:layout_height="457dp"
+        android:background="@color/colorIcon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:background="@color/colorIcon"
+        android:fontFamily="@font/annie_use_your_telescope"
+        android:text="@string/tvtituloreporte"
+        android:textColor="@color/md_blue_900"
+        android:textSize="25dp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
