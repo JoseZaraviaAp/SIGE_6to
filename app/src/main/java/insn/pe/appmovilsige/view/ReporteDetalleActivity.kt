@@ -83,19 +83,22 @@ class ReporteDetalleActivity : AppCompatActivity() {
         call.enqueue( object : Callback<List<CargoEmpleadoResponse>> {
             override fun onResponse(call: Call<List<CargoEmpleadoResponse>>, response: Response<List<CargoEmpleadoResponse>>) {
                if (response.isSuccessful){
-                    val cargo1=response.body()!![0]
-                    if (cargo1!=null){
-                        binding.tvcargopa1.text=cargo1.descCargo_PE
-                    }
-                    val cargo2=response.body()!![1]
-                    if (cargo2!=null){
-                        binding.tvcargopa2.text=cargo2.descCargo_PE
-                    }
-                    val cargo3=response.body()!![2]
-                    if (cargo3!=null){
-                        binding.tvcargocho.text=cargo3.descCargo_PE
-                    }
-                    
+                   try {
+                       val cargo1 = response.body()!![0]
+                       if (cargo1 != null) {
+                           binding.tvcargopa1.text = cargo1.descCargo_PE
+                       }
+                       val cargo2 = response.body()!![1]
+                       if (cargo2 != null) {
+                           binding.tvcargopa2.text = cargo2.descCargo_PE
+                       }
+                       val cargo3 = response.body()!![2]
+                       if (cargo3 != null) {
+                           binding.tvcargocho.text = cargo3.descCargo_PE
+                       }
+                   }catch(t: Throwable){
+                       t.printStackTrace()
+                   }
                 }
             }
 

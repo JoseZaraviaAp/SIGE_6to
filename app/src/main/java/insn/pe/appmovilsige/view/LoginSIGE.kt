@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
@@ -45,11 +46,7 @@ class loginSIGE : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding= ActivityLoginSIGEBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-
-
         session()
-
         //gmail
         binding.ivgmailsignin.setOnClickListener {
             val googleConf=GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -92,33 +89,47 @@ class loginSIGE : AppCompatActivity() {
         }
 
         binding.btningresar.setOnClickListener {
+            if(binding.etusuario.text.toString()!=""
+                && Patterns.EMAIL_ADDRESS.matcher(binding.etusuario.text.toString()).matches()) {
+                    if (binding.etcontra.text.toString()!="") {
+                        val loginRequest = LoginRequest(
+                            binding.etusuario.text.toString(),
+                            binding.etcontra.text.toString()
+                        )
+                        val call: Call<List<LoginReponse>> =
+                            RetrofitCliente.retrofitService.autenticacion(loginRequest)
+                        call.enqueue(object : Callback<List<LoginReponse>> {
+                            override fun onResponse(
+                                call: Call<List<LoginReponse>>,
+                                response: Response<List<LoginReponse>>
+                            ) {
+                                if (response.isSuccessful) {
+                                    val respuesta = response.body()!!
+                                    var usuarioLogged: LoginReponse = respuesta.get(0)
 
-            val loginRequest = LoginRequest(binding.etusuario.text.toString(),binding.etcontra.text.toString())
-            val call: Call<List<LoginReponse>> =
-                    RetrofitCliente.retrofitService.autenticacion(loginRequest)
-            call.enqueue( object : Callback<List<LoginReponse>>{
-                override fun onResponse(call: Call<List<LoginReponse>>,response: Response<List<LoginReponse>>) {
-                    if (response.isSuccessful){
-                        val respuesta=response.body()!!
-                        var usuarioLogged: LoginReponse =respuesta.get(0)
+                                    if (respuesta.size != 0) {
+                                        personaId = usuarioLogged.personaId
+                                        irActivityHome(usuarioLogged.personaId)
 
-                        if (respuesta.size!=0){
-                            personaId=usuarioLogged.personaId
-                            irActivityHome(usuarioLogged.personaId)
+                                    } else {
+                                        mostrarPantallaError()
+                                    }
+                                } else {
+                                    mostrarPantallaError()
+                                }
+                            }
 
-                        }else{
-                            mostrarPantallaError()
-                        }
+                            override fun onFailure(call: Call<List<LoginReponse>>, t: Throwable) {
+                                TODO("Not yet implemented")
+                            }
+
+                        })
                     }else{
-                        mostrarPantallaError()
+                        binding.etcontra.setError("Ingrese contraseña!")
                     }
-                }
-
-                override fun onFailure(call: Call<List<LoginReponse>>, t: Throwable) {
-                    TODO("Not yet implemented")
-                }
-
-            })
+            }else{
+                binding.etusuario.setError("Ingrese un mail válido")
+            }
         }
 
     }

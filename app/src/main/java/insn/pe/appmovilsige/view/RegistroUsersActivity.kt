@@ -1,10 +1,16 @@
 package insn.pe.appmovilsige.view
 
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Patterns
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
+import androidx.core.widget.addTextChangedListener
 import insn.pe.appmovilsige.HomeActivity
 import insn.pe.appmovilsige.databinding.ActivityRegistroUsersBinding
 import insn.pe.appmovilsige.retrofit.RetrofitCliente
@@ -18,6 +24,7 @@ import retrofit2.Response
 import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.regex.Pattern
 
 class RegistroUsersActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegistroUsersBinding
@@ -31,82 +38,117 @@ class RegistroUsersActivity : AppCompatActivity() {
             binding.etemail.setText(emailExtra)
         }
 
+        binding.etfechanac.addTextChangedListener (object :TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            @RequiresApi(Build.VERSION_CODES.O)
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (start==3)
+                {
+                    val texto=binding.etfechanac.text.toString()
+                    binding.etfechanac.setText("$texto-")
+                    binding.etfechanac.requestFocus()
+                    binding.etfechanac.setSelection(binding.etfechanac.text!!.length)
+                }
+                if (start==6)
+                {
+                    val texto=binding.etfechanac.text.toString()
+                    binding.etfechanac.setText("$texto-")
+                    binding.etfechanac.requestFocus()
+                    binding.etfechanac.setSelection(binding.etfechanac.text!!.length)
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+
+        })
+
         binding.btnregresar.setOnClickListener {
             startActivity(Intent(applicationContext,loginSIGE::class.java))
         }
         binding.btnregistraruser.setOnClickListener {
 
-            if (binding.etdni.text.toString()!=null&&
-            binding.etnombre.text.toString()!=null&&
-            binding.etapellido.text.toString()!=null&&
-            binding.etfechanac.text.toString()!=null&&
-            binding.etdireccion.text.toString()!=null&&
-            binding.ettiposangre.text.toString()!=null&&
-            binding.etpeso.text.toString()!=null&&
-            binding.ettalla.text.toString()!=null&&
-            binding.etnumero.text.toString()!=null&&
-            binding.etalergias.text.toString()!=null&&
-            binding.etemail.text.toString()!=null&&
-            binding.etemail.text.toString()!=null&&
-            binding.etpassword.text.toString()!=null) {
+            val patronEmail= Patterns.EMAIL_ADDRESS;
 
-                val RegistroRequest = RegistroRequest(
-                    binding.etdni.text.toString(),
-                    binding.etnombre.text.toString(),
-                    binding.etapellido.text.toString(),
-                    binding.etfechanac.text.toString(),
-                    binding.etdireccion.text.toString(),
-                    "no image", "1",
-                    binding.ettiposangre.text.toString(),
-                    binding.etpeso.text.toString(),
-                    binding.ettalla.text.toString(),
-                    binding.etnumero.text.toString(),
-                    binding.etalergias.text.toString(),
-                    binding.etemail.text.toString(),
-                    binding.etemail.text.toString(),
-                    binding.etpassword.text.toString()
-                )
+            if (binding.etdni.text.toString()!=""&&
+            binding.etnombre.text.toString()!=""&&
+            binding.etapellido.text.toString()!=""&&
+            binding.etfechanac.text.toString()!=""&&
+            binding.etdireccion.text.toString()!=""&&
+            binding.ettiposangre.text.toString()!=""&&
+            binding.etpeso.text.toString()!=""&&
+            binding.ettalla.text.toString()!=""&&
+            binding.etnumero.text.toString()!=""&&
+            binding.etalergias.text.toString()!=""&&
+            binding.etemail.text.toString()!=""&&
+            binding.etemail.text.toString()!=""&&
+            binding.etpassword.text.toString()!="") {
 
-                val call: Call<List<RegistroPaResponse>> =
-                    RetrofitCliente.retrofitService.registroPaciente(RegistroRequest)
-                call.enqueue(object : Callback<List<RegistroPaResponse>> {
-                    override fun onResponse(
-                        call: Call<List<RegistroPaResponse>>,
-                        response: Response<List<RegistroPaResponse>>
-                    ) {
-                        if (response.isSuccessful) {
-                            val respuesta = response.body()!!
-                            if (respuesta.size != 0) {
-                                irActivityHome(RegistroRequest.email, "RETrofit")
+                if (patronEmail.matcher(binding.etemail.text.toString()).matches()) {
+
+                    val RegistroRequest = RegistroRequest(
+                        binding.etdni.text.toString(),
+                        binding.etnombre.text.toString(),
+                        binding.etapellido.text.toString(),
+                        binding.etfechanac.text.toString(),
+                        binding.etdireccion.text.toString(),
+                        "no image", "1",
+                        binding.ettiposangre.text.toString(),
+                        binding.etpeso.text.toString(),
+                        binding.ettalla.text.toString(),
+                        binding.etnumero.text.toString(),
+                        binding.etalergias.text.toString(),
+                        binding.etemail.text.toString(),
+                        binding.etemail.text.toString(),
+                        binding.etpassword.text.toString()
+                    )
+
+                    val call: Call<List<RegistroPaResponse>> =
+                        RetrofitCliente.retrofitService.registroPaciente(RegistroRequest)
+                    call.enqueue(object : Callback<List<RegistroPaResponse>> {
+                        override fun onResponse(
+                            call: Call<List<RegistroPaResponse>>,
+                            response: Response<List<RegistroPaResponse>>
+                        ) {
+                            if (response.isSuccessful) {
+                                val respuesta = response.body()!!
+                                if (respuesta.size != 0) {
+                                    irActivityHome(RegistroRequest.email)
+                                } else {
+                                    mostrarPantallaError("Ha ocurrido un error en el registro. Es posible que ya esté registrado")
+                                }
                             } else {
-                                mostrarPantallaError()
+                                mostrarPantallaError("Ha ocurrido un error en el registro.")
                             }
-                        } else {
-                            mostrarPantallaError()
                         }
-                    }
 
-                    override fun onFailure(call: Call<List<RegistroPaResponse>>, t: Throwable) {
-                        t.printStackTrace()
-                    }
-                })
+                        override fun onFailure(call: Call<List<RegistroPaResponse>>, t: Throwable) {
+                            t.printStackTrace()
+                        }
+                    })
+                }
+                else{
+                    binding.etemail.setError("email no valido!")
+                }
             }else{
-                Toast.makeText(applicationContext,"Complete los campos!",Toast.LENGTH_LONG).show()
+                mostrarPantallaError("Complete todos los campos!")
             }
         }
 
     }
-    private fun irActivityHome(email :String, provider: String){
+    private fun irActivityHome(email :String){
         var intent = Intent(this, loginSIGE::class.java)
         intent.putExtra("email",email)
-        intent.putExtra("provider",provider)
         startActivity(intent)
 
     }
-    private fun mostrarPantallaError(){
+    private fun mostrarPantallaError(error:String){
         val builder= AlertDialog.Builder(this)
         builder.setTitle("Error")
-        builder.setMessage("Error de Registro. Verifique que los campos esten completos")
+        builder.setMessage(error)
         builder.setPositiveButton("Aceptar",null)
         val dialog: AlertDialog =builder.create()
         dialog.show()

@@ -78,7 +78,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout4"
-            android:layout_width="409dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -89,7 +89,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/valetfechanac"
-                android:inputType="date" />
+                android:inputType="date"
+                android:maxLength="10"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -104,6 +105,7 @@
                 android:id="@+id/etdireccion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:maxLength="40"
                 android:hint="@string/valetdireccion" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -136,6 +138,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/valetpeso"
+                android:maxLength="6"
                 android:inputType="numberDecimal" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -144,6 +147,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
+
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout7">
 
@@ -151,6 +155,7 @@
                 android:id="@+id/ettalla"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:maxLength="4"
                 android:hint="@string/valettalla"
                 android:inputType="numberDecimal" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -184,6 +189,7 @@
                 android:id="@+id/etalergias"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
                 android:hint="@string/valetalergias" />
         </com.google.android.material.textfield.TextInputLayout>
 

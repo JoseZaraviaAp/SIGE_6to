@@ -13,7 +13,7 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
 
-interface ApiRestService {
+interface   ApiRestService {
     @POST("persona/v1/validarEmail")
     fun autenticacion(@Body loginRequest: LoginRequest): Call<List<LoginReponse>>
 
